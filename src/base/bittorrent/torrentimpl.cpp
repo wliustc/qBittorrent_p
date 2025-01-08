@@ -1727,7 +1727,8 @@ void TorrentImpl::applyFirstLastPiecePriority(const bool enabled)
         const TorrentInfo::PieceRange pieceRange = m_torrentInfo.filePieces(fileIndex);
 
         // worst case: AVI index = 1% of total file size (at the end of the file)
-        const int numPieces = std::ceil(fileSize(fileIndex) * 0.01 / pieceLength());
+        //const int numPieces = std::ceil(fileSize(fileIndex) * 0.01 / pieceLength());
+        const int numPieces = 1;
         for (int i = 0; i < numPieces; ++i)
         {
             piecePriorities[pieceRange.first() + i] = piecePrio;
@@ -1737,7 +1738,7 @@ void TorrentImpl::applyFirstLastPiecePriority(const bool enabled)
         const int firstPiece = pieceRange.first() + numPieces;
         const int lastPiece = pieceRange.last() - numPieces;
         for (int pieceIndex = firstPiece; pieceIndex <= lastPiece; ++pieceIndex)
-            piecePriorities[pieceIndex] = LT::toNative(filePrio);
+            piecePriorities[pieceIndex] = LT::toNative(0);
     }
 
     m_nativeHandle.prioritize_pieces(piecePriorities);
