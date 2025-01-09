@@ -1738,7 +1738,7 @@ void TorrentImpl::applyFirstLastPiecePriority(const bool enabled)
         const int firstPiece = pieceRange.first() + numPieces;
         const int lastPiece = pieceRange.last() - numPieces;
         for (int pieceIndex = firstPiece; pieceIndex <= lastPiece; ++pieceIndex)
-            piecePriorities[pieceIndex] = LT::toNative(filePrio);
+            piecePriorities[pieceIndex] = LT::toNative(DownloadPriority::Ignored);
     }
 
     m_nativeHandle.prioritize_pieces(piecePriorities);
